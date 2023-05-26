@@ -6,10 +6,15 @@ public class RenderMaze : MonoBehaviour
 {
     [SerializeField] MazeGenerator mazeGenerator;
     [SerializeField] GameObject cellPrefabObject;
+    [SerializeField] CameraControls cam;
 
     public float cellSize = 1f;
 
     private void Start()
+    {
+        GenerateMaze();
+    }
+    public void GenerateMaze()
     {
         Cell[,] maze = mazeGenerator.GetMaze();
 
@@ -36,5 +41,6 @@ public class RenderMaze : MonoBehaviour
                 cell.Init(top,bottom,left,right);
             }
         }
+        cam.CenterOnMaze();
     }
 }
