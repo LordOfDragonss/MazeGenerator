@@ -13,6 +13,7 @@ public enum Direction
 
 public class MazeGenerator : MonoBehaviour
 {
+    public int startX, startY;
     public Cell currentCell;
     public int mazeWidth, mazeHeight;
     Cell[,] maze;
@@ -26,6 +27,7 @@ public class MazeGenerator : MonoBehaviour
                 maze[x, y] = new Cell(x, y);
             }
         }
+        CarvePath(startX, startY);
         return maze;
     }
     List<Direction> directions = new List<Direction>
@@ -117,6 +119,35 @@ public class MazeGenerator : MonoBehaviour
             startPosY = 0;
             Debug.LogWarning("Start Position out of bounds returning to default");
 
+        }
+
+        currentCell = new Cell(startPosX, startPosY);
+
+        List<Cell> path = new List<Cell>();
+        bool deadEnd = false;
+        while (!deadEnd)
+        {
+            Cell nextCell = CheckNeighbours();
+            if(nextCell == currentCell)
+            {
+                for(int i = path.Count - 1; i >= 0; i--)
+                {
+                    currentCell = path[i];
+                    path.RemoveAt(i);
+                    nextCell = CheckNeighbours();
+
+                    if (nextCell != currentCell) break;
+                }
+                if(nextCell == currentCell)
+                    deadEnd = true;
+            }
+            else
+            {
+                RemoveWall(currentCell, nextCell);
+                maze[nextCell.x, nextCell.y].visited = true;
+                currentCell = nextCell;
+                path.Add(currentCell);
+            }
         }
     }
 }
