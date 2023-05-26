@@ -58,17 +58,6 @@ public class MazeGenerator : MonoBehaviour
 
     }
 
-    void CarvePath(int startPosX, int startPosY)
-    {
-        if (startPosX < 0 || startPosY < 0 || startPosX > mazeWidth - 1 || startPosY > mazeHeight - 1)
-        {
-            startPosX = 0;
-            startPosY = 0;
-            Debug.LogWarning("Start Position out of bounds returning to default");
-
-        }
-    }
-
     Cell CheckNeighbours()
     {
         List<Direction> rndDir = GetRandomDirections();
@@ -98,6 +87,37 @@ public class MazeGenerator : MonoBehaviour
             }
         }
         return currentCell;
+    }
+
+    void RemoveWall (Cell primary, Cell secondary)
+    {
+        if(primary.x > secondary.x)
+        {
+            maze[primary.x,primary.y].leftWall = false;
+        }else if(primary.x < secondary.x)
+        {
+            maze[secondary.x, secondary.y].leftWall = false;
+        }
+        else if (primary.y < secondary.y)
+        {
+            maze[primary.x, primary.y].topWall = false;
+        }
+        else if (primary.y > secondary.y)
+        {
+            maze[secondary.x, secondary.y].topWall = false;
+        }
+
+    }
+
+    void CarvePath(int startPosX, int startPosY)
+    {
+        if (startPosX < 0 || startPosY < 0 || startPosX > mazeWidth - 1 || startPosY > mazeHeight - 1)
+        {
+            startPosX = 0;
+            startPosY = 0;
+            Debug.LogWarning("Start Position out of bounds returning to default");
+
+        }
     }
 }
 
