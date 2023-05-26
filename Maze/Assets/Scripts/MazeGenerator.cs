@@ -28,6 +28,40 @@ public class MazeGenerator : MonoBehaviour
         }
         return maze;
     }
+    List<Direction> directions = new List<Direction>
+    {
+    Direction.Up, Direction.Down, Direction.Left, Direction.Right
+    };
+
+    List<Direction> GetRandomDirections()
+    {
+        List<Direction> savedDirections = new List<Direction>(directions);
+
+        List<Direction> randomDirections = new List<Direction>();
+
+        while (savedDirections.Count > 0)
+        {
+            int rnd = Random.Range(0, directions.Count);
+            randomDirections.Add(directions[rnd]);
+            savedDirections.RemoveAt(rnd);
+        }
+        return randomDirections;
+    }
+
+
+
+    void CarvePath(int startPosX, int startPosY)
+    {
+        if (startPosX < 0 || startPosY < 0 || startPosX > mazeWidth - 1 || startPosY > mazeHeight - 1)
+        {
+            startPosX = 0;
+            startPosY = 0;
+            Debug.LogWarning("Start Position out of bounds returning to default");
+
+        }
+
+
+    }
 }
 
 public class Cell
