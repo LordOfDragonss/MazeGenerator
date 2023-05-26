@@ -67,8 +67,37 @@ public class MazeGenerator : MonoBehaviour
             Debug.LogWarning("Start Position out of bounds returning to default");
 
         }
+    }
 
+    Cell CheckNeighbours()
+    {
+        List<Direction> rndDir = GetRandomDirections();
 
+        for(int i = 0; i < rndDir.Count; i++)
+        {
+            Cell neighbour = currentCell;
+
+            switch (rndDir[i])
+            {
+                case Direction.Up:
+                    neighbour.y++;
+                    break;
+                case Direction.Down:
+                    neighbour.y--;
+                    break;
+                case Direction.Left:
+                    neighbour.x++;
+                    break;
+                case Direction.Right:
+                    neighbour.x--;
+                    break;
+            }
+            if (IsCellValid(neighbour.x,neighbour.y))
+            {
+                return neighbour;
+            }
+        }
+        return currentCell;
     }
 }
 
