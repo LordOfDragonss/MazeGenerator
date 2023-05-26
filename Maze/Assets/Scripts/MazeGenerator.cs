@@ -43,8 +43,8 @@ public class MazeGenerator : MonoBehaviour
 
         while (savedDirections.Count > 0)
         {
-            int rnd = Random.Range(0, directions.Count);
-            randomDirections.Add(directions[rnd]);
+            int rnd = Random.Range(0, savedDirections.Count);
+            randomDirections.Add(savedDirections[rnd]);
             savedDirections.RemoveAt(rnd);
         }
         return randomDirections;
