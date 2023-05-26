@@ -48,7 +48,15 @@ public class MazeGenerator : MonoBehaviour
         return randomDirections;
     }
 
+    bool IsCellValid(int x, int y)
+    {
+        if (x < 0 || y < 0 || x > mazeWidth - 1 || y > mazeHeight - 1 || maze[x, y].visited)
+        {
+            return false;
+        }
+        else return true;
 
+    }
 
     void CarvePath(int startPosX, int startPosY)
     {
@@ -67,14 +75,14 @@ public class MazeGenerator : MonoBehaviour
 public class Cell
 {
     public int x, y;
-    public bool gotVisited;
+    public bool visited;
     public bool topWall, leftWall;
     public Cell(int xpos, int ypos)
     {
         x = xpos;
         y = ypos;
 
-        gotVisited = false;
+        visited = false;
         topWall = true;
         leftWall = true;
     }
