@@ -15,8 +15,13 @@ public class MazeGenerator : MonoBehaviour
 {
     public int startX, startY;
     public Cell currentCell;
+    public GameObject currentCellIndicator;
     public int mazeWidth, mazeHeight;
     Cell[,] maze;
+    private void Update()
+    {
+        currentCellIndicator.transform.position = new Vector3(currentCell.x,currentCell.y);
+    }
     public Cell[,] GetMaze()
     {
         maze = new Cell[mazeWidth, mazeHeight];
