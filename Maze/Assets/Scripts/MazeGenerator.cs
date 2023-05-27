@@ -14,7 +14,7 @@ public enum Direction
 public class MazeGenerator : MonoBehaviour
 {
     public int startX, startY;
-    public Cell currentCell;
+    public Vector2Int currentCell;
     public GameObject currentCellIndicator;
     public int mazeWidth, mazeHeight;
     Cell[,] maze;
@@ -65,13 +65,13 @@ public class MazeGenerator : MonoBehaviour
 
     }
 
-    Cell CheckNeighbours()
+    Vector2Int CheckNeighbours()
     {
         List<Direction> rndDir = GetRandomDirections();
 
         for(int i = 0; i < rndDir.Count; i++)
         {
-            Cell neighbour = currentCell;
+            Vector2Int neighbour = currentCell;
 
             switch (rndDir[i])
             {
@@ -96,7 +96,7 @@ public class MazeGenerator : MonoBehaviour
         return currentCell;
     }
 
-    void RemoveWall (Cell primary, Cell secondary)
+    void RemoveWall (Vector2Int primary, Vector2Int secondary)
     {
         if(primary.x > secondary.x)
         {
@@ -126,13 +126,13 @@ public class MazeGenerator : MonoBehaviour
 
         }
 
-        currentCell = new Cell(startPosX, startPosY);
+        currentCell = new Vector2Int(startPosX, startPosY);
 
-        List<Cell> path = new List<Cell>();
+        List<Vector2Int> path = new List<Vector2Int>();
         bool deadEnd = false;
         while (!deadEnd)
         {
-            Cell nextCell = CheckNeighbours();
+            Vector2Int nextCell = CheckNeighbours();
             if(nextCell == currentCell)
             {
                 for(int i = path.Count - 1; i >= 0; i--)
@@ -162,6 +162,13 @@ public class Cell
     public int x, y;
     public bool visited;
     public bool topWall, leftWall;
+    public Vector2Int position
+    {
+        get
+        {
+            return new Vector2Int(x, y);
+        }
+    }
     public Cell(int xpos, int ypos)
     {
         x = xpos;
