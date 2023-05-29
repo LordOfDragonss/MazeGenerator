@@ -17,7 +17,7 @@ public class MazeGenerator : MonoBehaviour
     public Vector2Int currentCell;
     public GameObject currentCellIndicator;
     public int mazeWidth, mazeHeight;
-    Cell[,] maze;
+    internal Cell[,] maze;
     private void Update()
     {
         currentCellIndicator.transform.position = new Vector3(currentCell.x, currentCellIndicator.transform.position.y, currentCell.y);
@@ -40,7 +40,7 @@ public class MazeGenerator : MonoBehaviour
     Direction.Up, Direction.Down, Direction.Left, Direction.Right
     };
 
-    List<Direction> GetRandomDirections()
+    internal List<Direction> GetRandomDirections()
     {
         List<Direction> savedDirections = new List<Direction>(directions);
 
@@ -55,7 +55,7 @@ public class MazeGenerator : MonoBehaviour
         return randomDirections;
     }
 
-    bool IsCellValid(int x, int y)
+    internal bool IsCellValid(int x, int y)
     {
         if (x < 0 || y < 0 || x > mazeWidth - 1 || y > mazeHeight - 1 || maze[x, y].visited)
         {
@@ -65,7 +65,7 @@ public class MazeGenerator : MonoBehaviour
 
     }
 
-    Vector2Int CheckNeighbours()
+    internal Vector2Int CheckNeighbours()
     {
         List<Direction> rndDir = GetRandomDirections();
 
@@ -96,7 +96,7 @@ public class MazeGenerator : MonoBehaviour
         return currentCell;
     }
 
-    void RemoveWall (Vector2Int primary, Vector2Int secondary)
+    internal void RemoveWall (Vector2Int primary, Vector2Int secondary)
     {
         if(primary.x > secondary.x)
         {
@@ -116,7 +116,7 @@ public class MazeGenerator : MonoBehaviour
 
     }
 
-    void CarvePath(int startPosX, int startPosY)
+    internal void CarvePath(int startPosX, int startPosY)
     {
         if (startPosX < 0 || startPosY < 0 || startPosX > mazeWidth - 1 || startPosY > mazeHeight - 1)
         {
@@ -159,6 +159,10 @@ public class MazeGenerator : MonoBehaviour
 
 public class Cell
 {
+    public GameObject topWallObj;
+    public GameObject bottomWallObj;
+    public GameObject leftWallObj;
+    public GameObject rightWallObj;
     public int x, y;
     public bool visited;
     public bool topWall, leftWall;
