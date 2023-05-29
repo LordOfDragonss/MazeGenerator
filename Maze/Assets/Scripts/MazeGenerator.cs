@@ -20,7 +20,7 @@ public class MazeGenerator : MonoBehaviour
     Cell[,] maze;
     private void Update()
     {
-        currentCellIndicator.transform.position = new Vector3(currentCell.x,currentCell.y);
+        currentCellIndicator.transform.position = new Vector3(currentCell.x, currentCellIndicator.transform.position.y, currentCell.y);
     }
     public Cell[,] GetMaze()
     {
