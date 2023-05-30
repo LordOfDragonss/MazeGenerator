@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CellObject : MonoBehaviour
 {
-    [SerializeField] GameObject topWall;
-    [SerializeField] GameObject bottomWall;
-    [SerializeField] GameObject leftWall;
-    [SerializeField] GameObject rightWall;
+    [SerializeField] internal GameObject topWall;
+    [SerializeField] internal GameObject bottomWall;
+    [SerializeField] internal GameObject leftWall;
+    [SerializeField] internal GameObject rightWall;
     public void Init(bool top,bool bottom, bool left, bool right)
     {
         topWall.SetActive(top);
