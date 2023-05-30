@@ -9,6 +9,9 @@ public class ButtonEvents : MonoBehaviour
     [SerializeField] GameObject BasicMazePrefab;
     [SerializeField] GameObject ColorMazePrefab;
     [SerializeField] GameObject playerPrefab;
+    [SerializeField] GameObject objectivePrefab;
+
+    [SerializeField] int ObjectiveAmnt;
     public MazeSettings settings;
     bool ColorActive;
     GameObject currentMaze;
@@ -29,6 +32,7 @@ public class ButtonEvents : MonoBehaviour
         GameObject player = Instantiate(playerPrefab);
         PlayerMovement playermoves = player.GetComponent<PlayerMovement>();
         playermoves.maze = currentMaze.GetComponent<RenderMaze>();
+        SpawnObjectives();
 
     }
 
@@ -59,5 +63,12 @@ public class ButtonEvents : MonoBehaviour
         MazeGenerator maze = currentMaze.GetComponent<MazeGenerator>();
         maze.mazeWidth = settings.mazeWidth;
         maze.mazeHeight = settings.mazeHeight;
+    }
+    public void SpawnObjectives()
+    {
+        for (int i = 0; i < ObjectiveAmnt; i++)
+        {
+            Instantiate(objectivePrefab, new Vector3(Random.Range(0, settings.mazeWidth), 0, Random.Range(0, settings.mazeHeight)), Quaternion.identity);
+        }
     }
 }

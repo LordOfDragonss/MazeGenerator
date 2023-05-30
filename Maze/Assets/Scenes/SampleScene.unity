@@ -1138,6 +1138,9 @@ MonoBehaviour:
   MazePrefab: {fileID: 2259651646497954566, guid: fcd1d65823c250a4ebf2cc9f56fc41e0, type: 3}
   BasicMazePrefab: {fileID: 2259651646497954566, guid: fcd1d65823c250a4ebf2cc9f56fc41e0, type: 3}
   ColorMazePrefab: {fileID: 2259651646497954566, guid: 175bdb7f562190c4d83bd2ef12b2823a, type: 3}
+  playerPrefab: {fileID: 9206335881796597622, guid: 620c4c4ca99e9f14c9911fc7fc17fae3, type: 3}
+  objectivePrefab: {fileID: 1154954649726174675, guid: a0bcac7b62b69454db99f09fb8c60ed0, type: 3}
+  ObjectiveAmnt: 5
   settings: {fileID: 193833083}
 --- !u!1 &515054321
 GameObject:
