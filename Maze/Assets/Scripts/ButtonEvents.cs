@@ -8,6 +8,7 @@ public class ButtonEvents : MonoBehaviour
     [SerializeField] GameObject MazePrefab;
     [SerializeField] GameObject BasicMazePrefab;
     [SerializeField] GameObject ColorMazePrefab;
+    [SerializeField] GameObject playerPrefab;
     public MazeSettings settings;
     bool ColorActive;
     GameObject currentMaze;
@@ -25,6 +26,10 @@ public class ButtonEvents : MonoBehaviour
             currentMaze = Instantiate(MazePrefab);
             AsignSettings();
         }
+        GameObject player = Instantiate(playerPrefab);
+        PlayerMovement playermoves = player.GetComponent<PlayerMovement>();
+        playermoves.maze = currentMaze.GetComponent<RenderMaze>();
+
     }
 
     public void ColorMaze()
@@ -40,6 +45,7 @@ public class ButtonEvents : MonoBehaviour
             MazePrefab = BasicMazePrefab;
         }
         GenerateMaze();
+
     }
 
     public void AsignSettings()

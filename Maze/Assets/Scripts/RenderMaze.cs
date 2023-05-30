@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class RenderMaze : MonoBehaviour
 {
-    [SerializeField] MazeGenerator mazeGenerator;
+    [SerializeField] public MazeGenerator mazeGenerator;
     MazeGeneratorColor colorMaze;
     [SerializeField] GameObject cellPrefabObject;
     Cell[,] maze;
+    public CellObject[,] cells;
 
     public float cellSize = 1f;
 
@@ -24,6 +25,7 @@ public class RenderMaze : MonoBehaviour
     public void GenerateMaze()
     {
         maze = mazeGenerator.GetMaze();
+        cells = new CellObject[mazeGenerator.mazeWidth, mazeGenerator.mazeHeight];
 
         for (int x = 0; x < mazeGenerator.mazeWidth; x++)
         {
@@ -45,13 +47,14 @@ public class RenderMaze : MonoBehaviour
                 if (x == mazeGenerator.mazeWidth - 1) right = true;
                 if (y == 0) bottom = true;
                 cell.Init(top, bottom, left, right);
+                cells[x, y] = cell;
             }
         }
     }
     public void GenerateMazeColor()
     {
         maze = mazeGenerator.GetMaze();
-
+        cells = new CellObject[mazeGenerator.mazeWidth, mazeGenerator.mazeHeight];
         for (int x = 0; x < mazeGenerator.mazeWidth; x++)
         {
             for (int y = 0; y < mazeGenerator.mazeHeight; y++)
@@ -73,6 +76,7 @@ public class RenderMaze : MonoBehaviour
                 if (x == mazeGenerator.mazeWidth - 1) right = true;
                 if (y == 0) bottom = true;
                 cell.Init(top, bottom, left, right);
+                cells[x, y] = cell;
             }
         }
     }
