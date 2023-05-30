@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2259651646497954563}
   - component: {fileID: 2259651646497954560}
-  - component: {fileID: 2259651646497954561}
+  - component: {fileID: 3840390077894209298}
   m_Layer: 0
-  m_Name: Maze
+  m_Name: ColorMaze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a9e346a5446ef478fe6ea77655932d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeGenerator: {fileID: 2259651646497954561}
+  mazeGenerator: {fileID: 3840390077894209298}
   cellPrefabObject: {fileID: 770624112493289466, guid: 22776e7c13ea0624a8e3e464f8c77a02, type: 3}
   cellSize: 1
---- !u!114 &2259651646497954561
+--- !u!114 &3840390077894209298
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,12 +57,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2259651646497954566}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d0e08361e8133440b884baca857b5ef, type: 3}
+  m_Script: {fileID: 11500000, guid: ca2ebf9bf6c005b498a479a6d02a16b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startX: 0
   startY: 0
   currentCell: {x: 0, y: 0}
   currentCellIndicator: {fileID: 5271718082561920791, guid: 1a60f02683981fd40b25ace25c21c562, type: 3}
-  mazeWidth: 20
-  mazeHeight: 20
+  mazeWidth: 0
+  mazeHeight: 0

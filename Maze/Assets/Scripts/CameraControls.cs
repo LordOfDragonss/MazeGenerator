@@ -13,17 +13,16 @@ public class CameraControls : MonoBehaviour
 
     [Header("Center On Maze")]
     [SerializeField] Camera cam;
-    [SerializeField] MazeGenerator maze;
+    [SerializeField] MazeSettings maze;
 
     public void CenterOnMaze()
     {
         //center camera based on the mazes center currently uses the mazewidth for the height of the camera to display everything aslong as both mazeheight and mazewidth are equal
-        cam.gameObject.transform.position = new Vector3(transform.position.x + maze.mazeWidth / 2, maze.mazeWidth, transform.position.z + maze.mazeHeight / 2);
+        cam.gameObject.transform.position = new Vector3(maze.mazeWidth / 2, maze.mazeWidth,maze.mazeHeight / 2);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
