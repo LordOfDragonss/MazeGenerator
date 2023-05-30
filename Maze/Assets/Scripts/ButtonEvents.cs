@@ -10,6 +10,7 @@ public class ButtonEvents : MonoBehaviour
     [SerializeField] GameObject ColorMazePrefab;
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject objectivePrefab;
+    [SerializeField] ObjectiveTracker Otracker;
 
     [SerializeField] int ObjectiveAmnt;
     public MazeSettings settings;
@@ -66,9 +67,11 @@ public class ButtonEvents : MonoBehaviour
     }
     public void SpawnObjectives()
     {
+        Otracker.maxScore = ObjectiveAmnt;
         for (int i = 0; i < ObjectiveAmnt; i++)
         {
-            Instantiate(objectivePrefab, new Vector3(Random.Range(0, settings.mazeWidth), 0, Random.Range(0, settings.mazeHeight)), Quaternion.identity);
+           GameObject objective = Instantiate(objectivePrefab, new Vector3(Random.Range(0, settings.mazeWidth), 0, Random.Range(0, settings.mazeHeight)), Quaternion.identity);
+            objective.GetComponent<Objective>().tracker = Otracker;
         }
     }
 }
