@@ -5,36 +5,48 @@ using UnityEngine;
 public class ButtonEvents : MonoBehaviour
 {
     [SerializeField] CameraControls cameraCont;
-    [SerializeField] GameObject MazePrefab;
-    [SerializeField] GameObject BasicMazePrefab;
-    [SerializeField] GameObject ColorMazePrefab;
+    [SerializeField] GameObject mazePrefab;
+    [SerializeField] GameObject basicMazePrefab;
+    [SerializeField] GameObject colorMazePrefab;
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject objectivePrefab;
     [SerializeField] ObjectiveTracker Otracker;
+
+    List<GameObject> objectives = new List<GameObject>();
 
     [SerializeField] int ObjectiveAmnt;
     public MazeSettings settings;
     bool ColorActive;
     GameObject currentMaze;
+    GameObject player;
     public void GenerateMaze()
     {
         cameraCont.CenterOnMaze();
         if (currentMaze == null)
         {
-            currentMaze = Instantiate(MazePrefab);
-            AsignSettings();
+            InstantiateMaze();
         }
         else
         {
             Destroy(currentMaze);
-            currentMaze = Instantiate(MazePrefab);
-            AsignSettings();
+            Destroy(player);
+            foreach (GameObject objective in objectives)
+            {
+                Destroy(objective);
+            }
+            Otracker.score = 0;
+            InstantiateMaze();
         }
-        GameObject player = Instantiate(playerPrefab);
+    }
+
+    public void InstantiateMaze()
+    {
+        currentMaze = Instantiate(mazePrefab);
+        AsignSettings();
+        player = Instantiate(playerPrefab);
         PlayerMovement playermoves = player.GetComponent<PlayerMovement>();
         playermoves.maze = currentMaze.GetComponent<RenderMaze>();
         SpawnObjectives();
-
     }
 
     public void ColorMaze()
@@ -43,11 +55,11 @@ public class ButtonEvents : MonoBehaviour
         ColorActive = ColorActive ? false : true;
         if (ColorActive)
         {
-            MazePrefab = ColorMazePrefab;
+            mazePrefab = colorMazePrefab;
         }
         else
         {
-            MazePrefab = BasicMazePrefab;
+            mazePrefab = basicMazePrefab;
         }
         GenerateMaze();
 
@@ -72,6 +84,7 @@ public class ButtonEvents : MonoBehaviour
         {
            GameObject objective = Instantiate(objectivePrefab, new Vector3(Random.Range(0, settings.mazeWidth), 0, Random.Range(0, settings.mazeHeight)), Quaternion.identity);
             objective.GetComponent<Objective>().tracker = Otracker;
+            objectives.Add(objective);
         }
     }
 }

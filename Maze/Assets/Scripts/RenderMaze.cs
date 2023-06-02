@@ -19,7 +19,7 @@ public class RenderMaze : MonoBehaviour
         if (mazeGenerator.GetType() == typeof(MazeGeneratorColor))
         {
             colorMaze = (MazeGeneratorColor)mazeGenerator;
-            GenerateMazeColor();
+            GenerateColorMaze();
         }
     }
     public void GenerateMaze()
@@ -51,7 +51,7 @@ public class RenderMaze : MonoBehaviour
             }
         }
     }
-    public void GenerateMazeColor()
+    public void GenerateColorMaze()
     {
         maze = mazeGenerator.GetMaze();
         cells = new CellObject[mazeGenerator.mazeWidth, mazeGenerator.mazeHeight];

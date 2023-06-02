@@ -5,7 +5,7 @@ using UnityEngine;
 public class VictorySequence : MonoBehaviour
 {
     [SerializeField] ObjectiveTracker tracker;
-    [SerializeField] GameObject VictoryScreen;
+    [SerializeField] GameObject victoryScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +17,11 @@ public class VictorySequence : MonoBehaviour
     {
        if(tracker.score == tracker.maxScore && tracker.score != 0)
         {
-            VictoryScreen.SetActive(true);
-        } 
+            victoryScreen.SetActive(true);
+        }
+        else
+        {
+            victoryScreen.SetActive(false);
+        }
     }
 }
