@@ -41,12 +41,24 @@ public class ButtonEvents : MonoBehaviour
 
     public void InstantiateMaze()
     {
-        currentMaze = Instantiate(mazePrefab);
-        AsignSettings();
-        player = Instantiate(playerPrefab);
-        PlayerMovement playermoves = player.GetComponent<PlayerMovement>();
-        playermoves.maze = currentMaze.GetComponent<RenderMaze>();
-        SpawnObjectives();
+        if (
+            settings.mazeWidth >= settings.mazeWidthMin &&
+            settings.mazeHeight >= settings.mazeHeightMin &&
+            settings.mazeWidth <= settings.mazeWidthMax &&
+            settings.mazeHeight <= settings.mazeHeightMax)
+        {
+            currentMaze = Instantiate(mazePrefab);
+            AsignSettings();
+            player = Instantiate(playerPrefab);
+            PlayerMovement playermoves = player.GetComponent<PlayerMovement>();
+            playermoves.maze = currentMaze.GetComponent<RenderMaze>();
+            SpawnObjectives();
+            settings.errorField.text = "";
+        }
+        else
+        {
+            settings.errorField.text = "Invalid height or width please make sure it's between the minimum and maximum height/width value (default 10min 250max)";
+        }
     }
 
     public void ColorMaze()
@@ -72,7 +84,6 @@ public class ButtonEvents : MonoBehaviour
         if (settings.mazeWidth == 0)
             settings.mazeWidth = settings.defaultWidth;
 
-
         MazeGenerator maze = currentMaze.GetComponent<MazeGenerator>();
         maze.mazeWidth = settings.mazeWidth;
         maze.mazeHeight = settings.mazeHeight;
@@ -82,7 +93,7 @@ public class ButtonEvents : MonoBehaviour
         Otracker.maxScore = ObjectiveAmnt;
         for (int i = 0; i < ObjectiveAmnt; i++)
         {
-           GameObject objective = Instantiate(objectivePrefab, new Vector3(Random.Range(0, settings.mazeWidth), 0, Random.Range(0, settings.mazeHeight)), Quaternion.identity);
+            GameObject objective = Instantiate(objectivePrefab, new Vector3(Random.Range(0, settings.mazeWidth), 0, Random.Range(0, settings.mazeHeight)), Quaternion.identity);
             objective.GetComponent<Objective>().tracker = Otracker;
             objectives.Add(objective);
         }
