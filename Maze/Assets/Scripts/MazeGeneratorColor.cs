@@ -5,7 +5,7 @@ using UnityEngine;
 public class MazeGeneratorColor : MazeGenerator
 {
 
-    enum Colors
+    public enum Colors
     {
         Red,
         Green,
@@ -37,7 +37,7 @@ public class MazeGeneratorColor : MazeGenerator
             }
     }
 
-    void SetColor(Colors color, GameObject gObject)
+    public void SetColor(Colors color, GameObject gObject)
     {
         switch (color)
         {

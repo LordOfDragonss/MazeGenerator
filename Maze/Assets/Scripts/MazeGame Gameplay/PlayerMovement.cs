@@ -23,28 +23,96 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerCellPosition = new Vector2Int((int)transform.position.x, (int)transform.position.z);
         if (Input.GetKeyDown(KeyCode.W))
         {
-            MoveBasedOnCell(Direction.Up);
+            if (ButtonEvents.instance.ColorActive)
+            {
+                if (maze.cells[playerCellPosition.x, playerCellPosition.y+1].bottomWall.activeSelf)
+                {
+                    if (CheckColor(maze.cells[playerCellPosition.x, playerCellPosition.y+1].bottomWall, player.gameObject))
+                    {
+                        MoveBasedOnCell(Direction.Up);
+                    }
+                }
+                else
+                {
+                    MoveBasedOnCell(Direction.Up);
+                }
+            }
+            else
+            {
+                MoveBasedOnCell(Direction.Up);
+            }
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            MoveBasedOnCell(Direction.Down);
+            if (ButtonEvents.instance.ColorActive)
+            {
+                if (maze.cells[playerCellPosition.x, playerCellPosition.y-1].topWall.activeSelf)
+                {
+                    if (CheckColor(maze.cells[playerCellPosition.x, playerCellPosition.y-1].topWall, player.gameObject))
+                    {
+                        MoveBasedOnCell(Direction.Down);
+                    }
+                }
+                else
+                {
+                    MoveBasedOnCell(Direction.Down);
+                }
+            }
+            else
+            {
+                MoveBasedOnCell(Direction.Down);
+            }
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            MoveBasedOnCell(Direction.Left);
+            if (ButtonEvents.instance.ColorActive)
+            {
+                if (maze.cells[playerCellPosition.x+1, playerCellPosition.y].rightWall.activeSelf)
+                {
+                    if (CheckColor(maze.cells[playerCellPosition.x+1, playerCellPosition.y].rightWall, player.gameObject))
+                    {
+                        MoveBasedOnCell(Direction.Down);
+                    }
+                }
+                else
+                {
+                    MoveBasedOnCell(Direction.Left);
+                }
+            }
+            else
+            {
+                MoveBasedOnCell(Direction.Left);
+            }
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            MoveBasedOnCell(Direction.Right);
+            if (ButtonEvents.instance.ColorActive)
+            {
+                if (maze.cells[playerCellPosition.x-1, playerCellPosition.y].leftWall.activeSelf)
+                {
+                    if (CheckColor(maze.cells[playerCellPosition.x-1, playerCellPosition.y].leftWall, player.gameObject))
+                    {
+                        MoveBasedOnCell(Direction.Down);
+                    }
+                }
+                else
+                {
+                    MoveBasedOnCell(Direction.Right);
+                }
+            }
+            else
+            {
+                MoveBasedOnCell(Direction.Right);
+            }
         }
     }
 
     void MoveBasedOnCell(Direction direction)
     {
         //set the players cell position based on the players current transform position
-        playerCellPosition = new Vector2Int((int)transform.position.x, (int)transform.position.z);
         switch (direction)
         {
             case Direction.Up:
@@ -67,6 +135,19 @@ public class PlayerMovement : MonoBehaviour
                 if (!maze.cells[playerCellPosition.x, playerCellPosition.y].rightWall.activeSelf && !maze.cells[playerCellPosition.x + 1, playerCellPosition.y].leftWall.activeSelf)
                     player.transform.position = new Vector3(player.transform.position.x + 1, player.transform.position.y, player.transform.position.z);//move to the right
                 break;
+        }
+    }
+
+    bool CheckColor(GameObject firstObject, GameObject secondObject)
+    {
+
+        if (firstObject.gameObject.GetComponent<MeshRenderer>().material.color == secondObject.gameObject.GetComponent<MeshRenderer>().material.color)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

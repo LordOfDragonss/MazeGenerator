@@ -15,10 +15,16 @@ public class ButtonEvents : MonoBehaviour
     List<GameObject> objectives = new List<GameObject>();
 
     [SerializeField] int ObjectiveAmnt;
+    public static ButtonEvents instance;
     public MazeSettings settings;
-    bool ColorActive;
+    public bool ColorActive;
     GameObject currentMaze;
     GameObject player;
+
+    private void Start()
+    {
+        instance = this;
+    }
     public void GenerateMaze()
     {
         cameraCont.CenterOnMaze();
@@ -84,6 +90,14 @@ public class ButtonEvents : MonoBehaviour
         {
            GameObject objective = Instantiate(objectivePrefab, new Vector3(Random.Range(0, settings.mazeWidth), 0, Random.Range(0, settings.mazeHeight)), Quaternion.identity);
             objective.GetComponent<Objective>().tracker = Otracker;
+            objectives.Add(objective);
+        }
+        if (ColorActive)
+        {
+            GameObject objective = Instantiate(objectivePrefab, new Vector3(Random.Range(0, settings.mazeWidth), 0, Random.Range(0, settings.mazeHeight)), Quaternion.identity);
+            objective.GetComponent<Objective>().tracker = Otracker;
+            MazeGeneratorColor colorgenerator = mazePrefab.GetComponent<MazeGeneratorColor>();
+            colorgenerator.SetColor((MazeGeneratorColor.Colors)Random.Range(0, 4), objective);
             objectives.Add(objective);
         }
     }

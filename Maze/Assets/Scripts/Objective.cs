@@ -9,8 +9,13 @@ public class Objective : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            if (ButtonEvents.instance.ColorActive)
+            {
+                other.gameObject.GetComponent<MeshRenderer>().material.color = gameObject.GetComponent<MeshRenderer>().material.color;
+            }
             tracker.score++;
             Destroy(this.gameObject);
+
         }
     }
 }

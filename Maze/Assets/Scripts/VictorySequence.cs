@@ -16,13 +16,15 @@ public class VictorySequence : MonoBehaviour
     void Update()
     {
         if (tracker.score != 0)
+        {
             if (tracker.score == tracker.maxScore)
             {
                 victoryScreen.SetActive(true);
             }
-            else
-            {
-                victoryScreen.SetActive(false);
-            }
+        }
+        else
+        {
+            victoryScreen.SetActive(false);
+        }
     }
 }
