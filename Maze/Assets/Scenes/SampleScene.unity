@@ -1418,6 +1418,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 9206335881796597622, guid: 620c4c4ca99e9f14c9911fc7fc17fae3, type: 3}
   objectivePrefab: {fileID: 1154954649726174675, guid: a0bcac7b62b69454db99f09fb8c60ed0, type: 3}
   Otracker: {fileID: 1666402236}
+  cam: {fileID: 963194229}
   ObjectiveAmnt: 5
   settings: {fileID: 193833083}
 --- !u!1 &515054321
