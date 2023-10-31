@@ -13,13 +13,13 @@ public class MazeSettings : MonoBehaviour
     public int mazeWidthMax = 250;
     public int mazeWidthMin = 10;
 
-    [SerializeField] TMP_InputField widthField;
-    [SerializeField] TMP_InputField heightField;
+    public TMP_InputField widthField;
+    public TMP_InputField heightField;
 
-    [SerializeField] public TMP_Text errorField;
+     public TMP_Text errorField;
 
-    public int defaultWidth = 20;
-    public int defaultHeight = 20;
+    public int defaultWidth;
+    public int defaultHeight;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +36,5 @@ public class MazeSettings : MonoBehaviour
     {
 
 
-        mazeWidth = int.Parse(widthField.text);
-        mazeHeight = int.Parse(heightField.text);
     }
 }
