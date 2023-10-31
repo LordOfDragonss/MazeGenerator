@@ -17,8 +17,19 @@ public class CameraControls : MonoBehaviour
 
     public void CenterOnMaze()
     {
-        //center camera based on the mazes center currently uses the mazewidth for the height of the camera to display everything aslong as both mazeheight and mazewidth are equal
-        cam.gameObject.transform.position = new Vector3(maze.mazeWidth / 2, maze.mazeWidth,maze.mazeHeight / 2);
+
+        float mazeWidth = maze.mazeWidth;
+        float mazeHeight = maze.mazeHeight;
+
+
+        // Calculate the field of view based on the maze's dimensions
+        float fov = Mathf.Min(100f, 2 * Mathf.Atan(Mathf.Tan(cam.fieldOfView * Mathf.Deg2Rad / 2) * Mathf.Max(mazeWidth / mazeHeight, mazeHeight / mazeWidth)) * Mathf.Rad2Deg);
+
+        float cameraHeight = Mathf.Max(mazeWidth / (2.0f * Mathf.Tan(cam.fieldOfView * 0.5f * Mathf.Deg2Rad)), mazeHeight / 2.0f);
+
+        cam.fieldOfView = fov;
+        Vector3 cameraPosition = new Vector3(mazeWidth / 2, cameraHeight, mazeHeight / 2);
+        cam.gameObject.transform.position = cameraPosition;
     }
 
     // Update is called once per frame
